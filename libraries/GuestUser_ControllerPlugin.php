@@ -14,7 +14,9 @@ class GuestUser_ControllerPlugin extends Zend_Controller_Plugin_Abstract
     {
         $user = current_user();
         // If we're logged in, then prevent access to the admin for guest users
-        if ($user && $user->role == 'guest' && is_admin_theme()) {
+        ## 20190809 JNB bloque également l'admin au profil 'researcher'
+        #if ($user && $user->role == 'guest' && is_admin_theme()) {
+        if ($user && in_array($user->role, ['guest', 'researcher']) && is_admin_theme()) {
             $this->_getRedirect()->gotoUrl(WEB_ROOT . '/guest-user/user/me');
         }
     }
@@ -24,7 +26,7 @@ class GuestUser_ControllerPlugin extends Zend_Controller_Plugin_Abstract
      * for a limited time. Warn them here if it's been more than 20 minutes
      * @param unknown_type $request
      */
-    
+
     protected function _warnUnconfirmedUsers($request)
     {
         $user = current_user();
@@ -40,9 +42,9 @@ class GuestUser_ControllerPlugin extends Zend_Controller_Plugin_Abstract
                     if(!$token->confirmed && $user->active && $diff > 1200) {
                         $this->_getRedirect()->gotoUrl(WEB_ROOT . '/guest-user/user/stale-token');
                     }
-                }            
+                }
         }
-        
+
     }
 
     protected function _getRedirect()

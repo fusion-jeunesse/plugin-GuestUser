@@ -34,7 +34,9 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
             return;
         }
-        $user->role = 'guest';
+        ## 20190809 JNB Change le rôle par défaut pour 'researcher'
+        #$user->role = 'guest';
+        $user->role = 'researcher';
         if($openRegistration || $instantAccess) {
             $user->active = true;
         }
@@ -321,4 +323,3 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
         return $token;
     }
 }
-

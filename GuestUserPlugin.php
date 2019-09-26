@@ -187,7 +187,8 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         //Clobber the default admin link if user is guest
         $user = current_user();
         if($user) {
-            if($user->role == 'guest') {
+            ## 20190809 JNB Cache également la barre de navigation au profil 'researcher'
+            if(in_array( $user->role, ['guest', 'researcher'] )) {
                 unset($navLinks[1]);
             }
             $navLinks[0]['id'] = 'admin-bar-welcome';
@@ -250,7 +251,7 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
     }
-    
+
     public static function guestUserWidget($widget)
     {
         if(is_array($widget)) {
