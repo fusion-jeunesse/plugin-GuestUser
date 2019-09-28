@@ -1,6 +1,6 @@
 <?php
 $user = current_user();
-$pageTitle =  get_option('guest_user_dashboard_label');
+$pageTitle =  __(get_option('guest_user_dashboard_label'));
 echo head(array('title' => $pageTitle));
 ?>
 <h1><?php echo $pageTitle; ?></h1>

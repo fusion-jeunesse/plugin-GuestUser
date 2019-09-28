@@ -233,7 +233,7 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
 
     protected function _sendConfirmedEmail($user)
     {
-        $siteTitle = get_option('site_title');
+        $siteTitle = __(get_option('site_title'));
         $body = __("Thanks for joining %s!", $siteTitle);
         $siteUrl = absolute_url('/');
         $openRegistration = (get_option('guest_user_open') == 1);
@@ -255,7 +255,7 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
 
     protected function _sendConfirmationEmail($user, $token)
     {
-        $siteTitle = get_option('site_title');
+        $siteTitle = __(get_option('site_title'));
         $url = WEB_ROOT . '/guest-user/user/confirm/token/' . $token->token;
         $siteUrl = absolute_url('/');
         $subject = __("Your request to join %s", $siteTitle);
@@ -274,7 +274,7 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
 
     protected function _sendAdminNewConfirmedUserEmail($user)
     {
-        $siteTitle = get_option('site_title');
+        $siteTitle = __(get_option('site_title'));
         $url = WEB_ROOT . "/admin/users/edit/" . $user->id;
         $subject = __("New request to join %s", $siteTitle);
         $body = "<p>" . __("A new user has confirmed that they want to join %s : %s" , $siteTitle, "<a href='$url'>" . $user->username . "</a>") . "</p>";
@@ -298,7 +298,7 @@ class GuestUser_UserController extends Omeka_Controller_AbstractActionController
 
     protected function _getMail($user, $body, $subject)
     {
-        $siteTitle  = get_option('site_title');
+        $siteTitle  = __(get_option('site_title'));
         $from = get_option('administrator_email');
         $mail = new Zend_Mail('UTF-8');
         $mail->setBodyHtml($body);

@@ -236,7 +236,7 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
         $email = $record->email;
         $name = $record->name;
 
-        $siteTitle  = get_option('site_title');
+        $siteTitle  = __(get_option('site_title'));
         $subject = __("Your %s account", $siteTitle);
         $body = "<p>";
         $body .= __("An admin has made your account on %s active. You can now log in to with your password at this link:", $siteTitle );
