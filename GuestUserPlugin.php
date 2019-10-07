@@ -89,6 +89,9 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $acl = $args['acl'];
         $acl->addRole(new Zend_Acl_Role('guest'), null);
+        // Restrict access to super and admin users.
+        $args['acl']->addResource('GuestUser_List');
+
     }
 
     public function hookConfig($args)
@@ -178,7 +181,8 @@ class GuestUserPlugin extends Omeka_Plugin_AbstractPlugin
     public function filterAdminNavigationMain($navLinks)
     {
         $navLinks['Guest User'] = array('label' => __("Guest Users"),
-                                        'uri' => url("guest-user/user/browse?role=guest"));
+                                        'uri' => url("guest-user/user/browse?role=guest"),
+                                        'resource' => 'GuestUser_List');
         return $navLinks;
     }
 
